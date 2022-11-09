@@ -7,8 +7,8 @@ Project = pd.read_csv('Project Group.csv')
 group_id = []
 for i in range(len(Project['login_id'])):
   uni = Project['login_id'][i]
-  print(i, uni)
-  uni_group = -1
+  # print(i, uni)
+  uni_group_idx = -1
   for j in range(len(mece["group_id"])):
     for k in range(6):
       
@@ -18,11 +18,14 @@ for i in range(len(Project['login_id'])):
       except:
         pass
 
-    if uni_group >=0:
+    if uni_group_idx >=0:
       break
-  uni_group = mece["group_id"][uni_group_idx]
-  group_id.append(uni_group)
+  if uni_group_idx == -1:
+    group_id.append(-1)
+  else:
+    uni_group = mece["group_id"][uni_group_idx]
+    group_id.append(uni_group)
 np.savetxt('group_id.csv',group_id)
 
-    
-        
+
+### if the uni has capital letter.it fails.with -1....
